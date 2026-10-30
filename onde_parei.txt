@@ -1,0 +1,16 @@
+bugs
+
+1 - Conta está errada. Não está dobrando ou triplicando valores.
+    É algo aqui..
+    if j2[n].count(j) == 3:
+        j2_score += j * 3
+    elif j2[n].count(j) == 2:
+        j2_score += j * 2
+    elif j2[n].count(j) == 1:
+        j2_score += j
+    else:
+       j2_score += 0
+
+roadmap
+
+1 - colorida para melhorar a experiência
