@@ -3,6 +3,7 @@ Código 'artesanal' do jogo bugalha
 """
 
 import random
+import tkinter as tk
 
 # As duas matrizes que representam os tabuleiros dos jogadores
 j1 = [[0,0,0],[0,0,0],[0,0,0]]
@@ -10,8 +11,13 @@ j2 = [[0,0,0],[0,0,0],[0,0,0]]
 
 # A vez de qual jogador. Se j1_row == False, então é j2. Não é necessário criar uma j2_row
 j1_time = True
-
 game_over = False
+
+# Variáveis de tela:
+window = tk.Tk()
+window.title("Bugalha_by_gio")
+window.rowconfigure(0, minsize=800, weight=1)
+window.columnconfigure(1, minsize=800, weight=1)
 
 
 def print_tabuleiro(j1, j2, cel_row_j1_coloring=0, cel_row_j2_coloring=0, j1_name="J1", j2_name="J2"):
@@ -255,22 +261,26 @@ def score(j1, j2, j1_name="J1", j2_name="J2"):
         #j1
         for j in range(1,7):
             # Check ------------------------------
-            print("n", n, "j", j, f"count{j}", j2[n].count(j), "score", j2_score)
+            #print("n", n, "j", j, f"count{j}", j2[n].count(j), "score", j2_score)
             #Conta 1 a 6, procura a quandidade de casa. Se tem 2, então * 2. Sem tem 3, então * 3.
             # ==1 porque se não colocar o igual, o loop fica somando tudo.
             # O zero porque senão ele soma algum elemento errado
-            j1_score += j * 3 if j1[n].count(j) == 3 else j * 2 if j1[n].count(j) == 2 else j if j1[n].count(j) == 1 else 0    
+            # Explicação da fórmula: j1_score += j * 3 é meramente a soma dos três números. Precisa multiplicar os 3 números por 3
+            # então, j1_score += j * 9.
+            # A mesma coisa para j * 4 (são a soma de dois números iguais, vezes 2)
+            j1_score += j * 9 if j1[n].count(j) == 3 else j * 4 if j1[n].count(j) == 2 else j if j1[n].count(j) == 1 else 0    
             # ------------------------------------
         #j2
         for j in range(1,7): 
             #Check --------------------------------------
-            print("n", n, "j", j, f"count{j}", j2[n].count(j), "score", j2_score)
+            
+            #print("n", n, "j", j, f"count{j}", j2[n].count(j), "score", j2_score)
             #-------------------------------------------
             # Mesma lógica acima. Sem o ternário para facilitar o racionio. 
             if j2[n].count(j) == 3:
-                j2_score += j * 3
+                j2_score += j * 9
             elif j2[n].count(j) == 2:
-                j2_score += j * 2
+                j2_score += j * 4
             elif j2[n].count(j) == 1:
                 j2_score += j
             else:
@@ -283,6 +293,8 @@ def score(j1, j2, j1_name="J1", j2_name="J2"):
           j2_name, ": ", j2_score, "\n",
           "---------------------", ""
     )
+
+# Window
 
 
 
